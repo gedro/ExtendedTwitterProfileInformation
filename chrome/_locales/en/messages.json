@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Extended Twitter Profile Information"
+    ,"description":"name of the extension"
+  },
+  "appDesc": {
+    "message": ""
+    ,"description": "description of the extension"
+  }
+}
