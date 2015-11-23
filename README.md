@@ -1,2 +1,2 @@
 # ExtendedTwitterProfileInformation
-It displays basic information of user at the bottom of the tweet.
+Show Twitter user profile information on the top of the tweet
