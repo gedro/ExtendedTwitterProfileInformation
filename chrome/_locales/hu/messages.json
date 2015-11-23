@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Kibővített Twitter Felhasználói Információk"
+    ,"description": "az kiegészítő neve"
+  },
+  "appDesc": {
+    "message": "Twitter user profil információk megjelenítése tweetek elején"
+    ,"description": "a kiegészítő leírása"
+  }
+}

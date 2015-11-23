@@ -1,10 +1,10 @@
 {
   "appName": {
     "message": "Extended Twitter Profile Information"
-    ,"description":"name of the extension"
+    ,"description": "name of the extension"
   },
   "appDesc": {
-    "message": ""
+    "message": "Show Twitter user profile information on the top of the tweet"
     ,"description": "description of the extension"
   }
 }

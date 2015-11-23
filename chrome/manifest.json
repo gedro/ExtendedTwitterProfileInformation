@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "default_locale": "en",
   "manifest_version": 2,
-  "homepage_url": "http://ptl.expert",
+  "homepage_url": "https://github.com/gedro/ExtendedTwitterProfileInformation",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -19,10 +19,11 @@
         "*://*.twitter.com/*"
       ],
       "js": [
-        "src/js/extended_twitter_profile_info.js"
+        "js/jquery/jquery.min.js",
+        "src/inject/js/extended_twitter_profile_info.js"
       ],
       "css": [
-        "src/js/extended_twitter_profile_info.css"
+        "src/inject/css/extended_twitter_profile_info.css"
       ]
     }
   ]
