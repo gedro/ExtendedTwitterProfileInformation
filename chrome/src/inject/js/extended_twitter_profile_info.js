@@ -4,12 +4,12 @@ function etpiDataLoader() {
 
         if(that.children(".ProfileCardStats").length === 0 && !that.hasClass("etpi-inserted")) {
             var dataUserIdElement = that.find(".original-tweet[data-user-id]");
-            var dateUserID = dataUserIdElement.attr("data-user-id");
+            var dataUserID = dataUserIdElement.attr("data-user-id");
 
             jQuery.ajax({
                 url: "https://twitter.com/i/profiles/popup",
                 type: "get",
-                data:{user_id: dateUserID, wants_hovercard: true},
+                data:{user_id: dataUserID, wants_hovercard: true},
                 success: function(response) {
                     this.workOnResponseJson(that, response);
                 },
