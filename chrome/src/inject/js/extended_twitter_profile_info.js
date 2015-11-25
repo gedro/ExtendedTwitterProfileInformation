@@ -1,4 +1,4 @@
-function etpiDataLoader() {
+function etpiDataLoader(ownerUserID) {
     jQuery(".expanding-stream-item").each(function () {
         var that = jQuery(this);
 
@@ -6,28 +6,30 @@ function etpiDataLoader() {
             var dataUserIdElement = that.find(".original-tweet[data-user-id]");
             var dataUserID = dataUserIdElement.attr("data-user-id");
 
-            jQuery.ajax({
-                url: "https://twitter.com/i/profiles/popup",
-                type: "get",
-                data:{user_id: dataUserID, wants_hovercard: true},
-                success: function(response) {
-                    this.workOnResponseJson(that, response);
-                },
-                error: function(xhr) {
-                    if(xhr.status === 200) {
-                        this.workOnResponseJson(that, xhr.responseText);
+            if(dataUserID !== ownerUserID) {
+                jQuery.ajax({
+                    url: "https://twitter.com/i/profiles/popup",
+                    type: "get",
+                    data:{user_id: dataUserID, wants_hovercard: true},
+                    success: function(response) {
+                        this.workOnResponseJson(that, response);
+                    },
+                    error: function(xhr) {
+                        if(xhr.status === 200) {
+                            this.workOnResponseJson(that, xhr.responseText);
+                        }
+                    },
+                    workOnResponseJson: function(that, jsonText) {
+                        var response = jQuery.parseJSON(jsonText);
+
+                        that.find(".stream-item-header")
+                            .find(".time")
+                            .after(jQuery(response.html).find("div.ProfileCardStats"));
+
+                        that.addClass("etpi-inserted");
                     }
-                },
-                workOnResponseJson: function(that, jsonText) {
-                    var response = jQuery.parseJSON(jsonText);
-
-                    that.find(".stream-item-header")
-                        .find(".time")
-                        .after(jQuery(response.html).find("div.ProfileCardStats"));
-
-                    that.addClass("etpi-inserted");
-                }
-            });
+                });
+            }
         }
     });
 }
@@ -37,12 +39,15 @@ chrome.extension.sendMessage({}, function(response) {
 	if (document.readyState === "complete") {
             clearInterval(readyStateCheckInterval);
             
+            var ownerUserIdElement = jQuery("#user-dropdown").find(".avatar[data-user-id]");
+            var ownerUserID = ownerUserIdElement.attr("data-user-id");
+
             var totalCount = jQuery(".expanding-stream-item").length;
-            etpiDataLoader();
+            etpiDataLoader(ownerUserID);
             $("#stream-items-id").bind("DOMSubtreeModified", function() {
                 if(jQuery(".expanding-stream-item").length > totalCount) {
                     totalCount = jQuery(".expanding-stream-item").length;
-                    etpiDataLoader();
+                    etpiDataLoader(ownerUserID);
                 }
             });
 	}
